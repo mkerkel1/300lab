@@ -32,7 +32,7 @@ export class TodosEffects {
         .pipe(
           map(response => actions.loadTodosSucceeded({ todos: response.data }))
         )
-      )
+      ),
     ), { dispatch: true }
   );
 

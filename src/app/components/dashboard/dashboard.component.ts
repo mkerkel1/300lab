@@ -10,6 +10,7 @@ import { AppState, selectDashboardProjects } from 'src/app/reducers';
 import { Store, select } from '@ngrx/store';
 import { loadTodos } from 'src/app/actions/todo.actions';
 import { logOutRequested } from 'src/app/actions/auth.actions';
+import { loadProjects } from 'src/app/actions/project.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit {
     private dialog: MatDialog,
     private bottomSheet: MatBottomSheet) {
     store.dispatch(loadTodos());
+    store.dispatch(loadProjects());
   }
 
   ngOnInit(): void {

@@ -32,10 +32,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { TodosEffects } from './effects/todos.effects';
+import { ProjectEffects } from './effects/project.effects';
 import { LoginComponent } from './components/login/login.component';
 import { AuthEffects } from './effects/auth.effects';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { AdminModule } from './features/admin/admin.module';
+import { ProjectEntryComponent } from './components/project-entry/project-entry.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,8 @@ import { AdminModule } from './features/admin/admin.module';
     DashboardComponent,
     TodoListComponent,
     TodoEntryComponent,
-    LoginComponent
+    LoginComponent,
+    ProjectEntryComponent
   ],
   imports: [
     HttpClientModule,
@@ -57,7 +60,7 @@ import { AdminModule } from './features/admin/admin.module';
     StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument(),
     StoreRouterConnectingModule.forRoot(),
-    EffectsModule.forRoot([TodosEffects, AuthEffects]),
+    EffectsModule.forRoot([TodosEffects, AuthEffects, ProjectEffects]),
     DragDropModule,
     MatDialogModule,
     MatChipsModule,

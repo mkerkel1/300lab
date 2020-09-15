@@ -1,0 +1,20 @@
+<form [formGroup]="form">
+  <div class="field-container">
+    <mat-form-field hintLabel="Max of 200 Characters"
+                    style="width: 800px !important"
+                    appearance="fill">
+      <mat-label>Enter a new Project name</mat-label>
+      <input matInput
+             #input
+             formControlName="name"
+             maxlength="200"
+             placeholder="Defeat-The-Evil-Empire">
+      <mat-hint align="end">{{ input.value?.length || 0}}/200</mat-hint>
+    </mat-form-field>
+  </div>
+  <div>
+    <button mat-button
+            (click)="add()"
+            [disabled]="form.invalid">Submit</button>
+  </div>
+</form>
