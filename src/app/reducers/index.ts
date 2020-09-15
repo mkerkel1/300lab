@@ -58,7 +58,7 @@ export const selectDashboardProjects = createSelector(
   (projects, todos) => projects.map(p => ({
     id: p.id,
     name: p.name,
-    count: todos.filter(t => t.project === p.name).length
+    count: todos.filter(t => t.project === p.name && !t.completed).length
   } as fromModels.DashboardProject))
 );
 
