@@ -9,6 +9,7 @@ import { DashboardProject } from 'src/app/models';
 import { AppState, selectDashboardProjects } from 'src/app/reducers';
 import { Store, select } from '@ngrx/store';
 import { loadTodos } from 'src/app/actions/todo.actions';
+import { logOutRequested } from 'src/app/actions/auth.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -52,6 +53,9 @@ export class DashboardComponent implements OnInit {
     dlg.afterClosed().subscribe(_ => this.router.navigate(['dashboard']));
   }
 
+  logOut(): void {
+    this.store.dispatch(logOutRequested());
+  }
   addItem(): void {
     const config: MatBottomSheetConfig = {
       disableClose: true,

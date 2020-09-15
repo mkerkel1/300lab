@@ -32,5 +32,13 @@ export class AuthEffects {
     )
   );
 
+  logoutSucceded$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(authActions.logOutRequested),
+      tap(r => localStorage.removeItem('auth_token')),
+      tap(() => this.router.navigate(['login']))
+    ), { dispatch: false });
+
+
   constructor(private actions$: Actions, private client: HttpClient, private router: Router) { }
 }
