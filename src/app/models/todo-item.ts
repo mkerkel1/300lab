@@ -4,4 +4,6 @@ export interface TodoItem {
   project?: string;
   dueDate?: string;
   completed: boolean;
+  editingProject: boolean;
+  editingDate: boolean;
 }

@@ -2,10 +2,14 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as actions from '../actions/todo.actions';
 export interface UiHintsState {
   inboxSort: string[];
+  idOfToDoProjectChanging: string;
+  idOfToDoDateChanging: string;
 }
 
 const initialState: UiHintsState = {
-  inboxSort: []
+  inboxSort: [],
+  idOfToDoProjectChanging: null,
+  idOfToDoDateChanging: null
 };
 
 const reducerFunction = createReducer(

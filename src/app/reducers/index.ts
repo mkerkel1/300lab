@@ -34,6 +34,8 @@ const selectAuthBranch = (state: AppState) => state.auth;
 const { selectEntities: selectTodoEntities, selectAll: selectAllTodos } = fromTodos.adapter.getSelectors(selectTodosBranch);
 const { selectAll: selectAllProjects } = fromProjects.adapter.getSelectors(selectProjectBranch);
 const selectInboxTodoSorts = createSelector(selectUiHintsBranch, b => b.inboxSort);
+const selectProjectTodoIdsBeingEdited = createSelector(selectUiHintsBranch, b => b.idOfToDoProjectChanging);
+const selectDateTodoIdsBeingEdited = createSelector(selectUiHintsBranch, b => b.idOfToDoDateChanging);
 // Selectors for Components
 
 export const selectAllProjectsList = createSelector(
@@ -49,8 +51,12 @@ const selectSortedInboxTodos = createSelector(
 
 export const selectInboxTodoList = createSelector(
   selectSortedInboxTodos,
-  (todos) => todos.filter(t => !t.project)
+  selectProjectTodoIdsBeingEdited,
+  selectDateTodoIdsBeingEdited,
+  (todos, prjId, dateId) => todos.filter(t => !t.project)
+    .map(t => ({ editingProject: false, editingDate: false, ...t }) as fromModels.TodoItem)
 );
+
 
 export const selectDashboardProjects = createSelector(
   selectAllProjectsList,
@@ -65,7 +71,8 @@ export const selectDashboardProjects = createSelector(
 export const selectListForProject = createSelector(
   selectAllTodos,
   (todos, props) => {
-    return todos.filter((t: fromTodos.TodoEntity) => t.project === props.name) as fromModels.TodoItem[];
+    return todos.filter((t: fromTodos.TodoEntity) => t.project === props.name)
+      .map(t => ({ editingProject: false, editingDate: false, ...t }) as fromModels.TodoItem);
   }
 );
 
