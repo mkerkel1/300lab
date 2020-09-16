@@ -5,7 +5,14 @@ export const todoItemSorted = createAction(
   '[todo] todo item sorted',
   props<{ id: string, previousIndex: number, currentIndex: number }>()
 );
-
+export const todoCompleted = createAction(
+  '[todo] todo item completed',
+  props<{ id: string }>()
+);
+export const todoIncompleted = createAction(
+  '[todo] todo item incompleted',
+  props<{ id: string }>()
+);
 let tempId = 0;
 export const todoAdded = createAction(
   '[todo] todo item added',

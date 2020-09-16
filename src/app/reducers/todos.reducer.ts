@@ -26,6 +26,14 @@ const reducerFunction = createReducer(
     // the old switcharoo
     const tempState = adapter.removeOne(action.oldId, state);
     return adapter.addOne(action.payload, tempState);
+  }),
+  on(actions.todoIncompleted, (state, action) => {
+
+    return adapter.updateOne({ id: action.id, changes: { completed: false } as Partial<TodoEntity> }, state);
+  }),
+  on(actions.todoCompleted, (state, action) => {
+
+    return adapter.updateOne({ id: action.id, changes: { completed: true } as Partial<TodoEntity> }, state);
   })
 );
 

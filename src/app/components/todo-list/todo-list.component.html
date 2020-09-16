@@ -34,11 +34,16 @@
     <mat-divider></mat-divider>
 
     <button mat-button
-            *ngIf="!item.completed">
+            *ngIf="!item.completed"
+            [attr.data-id]="item.id"
+            (click)="markComplete(item.id)">
       <mat-icon>radio_button_unchecked</mat-icon>
     </button>
+
     <button mat-button
-            *ngIf="item.completed">
+            *ngIf="item.completed"
+            [attr.data-id]="item.id"
+            (click)="markIncomplete(item.id)">
       <mat-icon>radio_button_checked</mat-icon>
     </button>
   </div>

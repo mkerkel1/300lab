@@ -35,7 +35,25 @@ export class TodosEffects {
       ),
     ), { dispatch: true }
   );
+  todoCompleted$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.todoCompleted),
+      switchMap((originalAction) => this.client.post<any>(environment.apiUrl + 'todos/completed', { id: originalAction.id }).pipe(
+        tap(r => console.log(r))
+      )
 
+      ),
+    ), { dispatch: false }
+  );
+  todoIncompleted$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.todoIncompleted),
+      switchMap((originalAction) => this.client.post<any>(environment.apiUrl + 'todos/incomplete', { id: originalAction.id }).pipe(
+        tap(r => console.log(r))
+      )
 
+      ),
+    ), { dispatch: false }
+  );
   constructor(private actions$: Actions, private client: HttpClient) { }
 }

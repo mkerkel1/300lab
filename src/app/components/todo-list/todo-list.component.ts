@@ -50,7 +50,13 @@ export class TodoListComponent implements OnInit {
       }));
     }
   }
+  markComplete(id: string): void {
+    this.store.dispatch(actions.todoCompleted({ id }));
 
+  }
+  markIncomplete(id: string): void {
+    this.store.dispatch(actions.todoIncompleted({ id }));
+  }
   done(): void {
     this.dialogRef.close();
   }
