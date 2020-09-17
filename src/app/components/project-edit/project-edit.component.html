@@ -1,0 +1,24 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="fill">
+    <mat-label>Project</mat-label>
+    <mat-select formControlName="project">
+      <mat-option value=""></mat-option>
+      <mat-option *ngFor="let p of projects$ | async"
+                  value="{{p.name}}">{{p.name}}</mat-option>
+
+    </mat-select>
+  </mat-form-field>
+  <button mat-icon-button
+          color="primary"
+          aria-label="Save"
+          [disabled]="form.invalid"
+          (click)="save()">
+    <mat-icon>done</mat-icon>
+  </button>
+  <button mat-icon-button
+          color="primary"
+          aria-label="Save"
+          (click)='cancel()'>
+    <mat-icon>close</mat-icon>
+  </button>
+</form>

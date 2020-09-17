@@ -45,6 +45,17 @@ export class TodosEffects {
       ),
     ), { dispatch: false }
   );
+  todoProjectEdit$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.todoProjectEdit),
+      switchMap((originalAction) =>
+        this.client.put<any>(environment.apiUrl + 'todos/' + originalAction.id + '/project', { value: originalAction.project }).pipe(
+          tap(r => console.log(r))
+        )
+
+      ),
+    ), { dispatch: false }
+  );
   todoIncompleted$ = createEffect(() =>
     this.actions$.pipe(
       ofType(actions.todoIncompleted),

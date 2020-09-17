@@ -38,7 +38,10 @@ const reducerFunction = createReducer(
     } else {
       return state;
     }
-  })
+  }),
+  on(actions.todoStartProjectEdit, (state, action) => {
+    return ({ ...state, idOfToDoProjectChanging: action.id }); // sort them in the order they come from the api
+  }),
 );
 
 function replaceIdWithNewId(array: string[], oldId: string, newId: string): string[] {

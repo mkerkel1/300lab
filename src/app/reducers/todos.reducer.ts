@@ -31,6 +31,10 @@ const reducerFunction = createReducer(
 
     return adapter.updateOne({ id: action.id, changes: { completed: false } as Partial<TodoEntity> }, state);
   }),
+  on(actions.todoProjectEdit, (state, action) => {
+
+    return adapter.updateOne({ id: action.id, changes: { project: action.project } as Partial<TodoEntity> }, state);
+  }),
   on(actions.todoCompleted, (state, action) => {
 
     return adapter.updateOne({ id: action.id, changes: { completed: true } as Partial<TodoEntity> }, state);

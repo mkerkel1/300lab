@@ -54,7 +54,7 @@ export const selectInboxTodoList = createSelector(
   selectProjectTodoIdsBeingEdited,
   selectDateTodoIdsBeingEdited,
   (todos, prjId, dateId) => todos.filter(t => !t.project)
-    .map(t => ({ editingProject: false, editingDate: false, ...t }) as fromModels.TodoItem)
+    .map(t => ({ editingProject: prjId === t.id, editingDate: dateId === t.id, ...t }) as fromModels.TodoItem)
 );
 
 
@@ -70,9 +70,11 @@ export const selectDashboardProjects = createSelector(
 
 export const selectListForProject = createSelector(
   selectAllTodos,
-  (todos, props) => {
+  selectProjectTodoIdsBeingEdited,
+  selectDateTodoIdsBeingEdited,
+  (todos, prjId, dateId, props) => {
     return todos.filter((t: fromTodos.TodoEntity) => t.project === props.name)
-      .map(t => ({ editingProject: false, editingDate: false, ...t }) as fromModels.TodoItem);
+      .map(t => ({ editingProject: prjId === t.id, editingDate: dateId === t.id, ...t }) as fromModels.TodoItem);
   }
 );
 

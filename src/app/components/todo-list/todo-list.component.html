@@ -13,22 +13,29 @@
 
     <span>{{item.name}}</span>
     <mat-divider></mat-divider>
-    <div *ngIf="item.project">{{ item.project }}
+    <div *ngIf="item.project && !item.editingProject">{{ item.project }}
 
 
     </div>
-    <span *ngIf="!item.project">No Project</span>
+    <app-project-edit *ngIf="item.editingProject"
+                      toDoId="{{ item.id }}"></app-project-edit>
+    <span *ngIf="!item.project  && !item.editingProject ">No Project</span>
     <button mat-icon-button
             color="primary"
-            aria-label="Example icon button with a menu icon">
+            aria-label="Example icon button with a menu icon"
+            *ngIf="!item.editingProject"
+            (click)="editProject(item.id)">
       <mat-icon>edit</mat-icon>
     </button>
     <mat-divider></mat-divider>
+    <app-duedate-edit *ngIf="item.editingDate"
+                      toDoId="item.id"></app-duedate-edit>
     <span *ngIf="item.dueDate">{{ item.dueDate | date:'shortDate'  }} {{ item.dueDate | date:'shortTime' }}</span>
     <span *ngIf="!item.dueDate">No Due Date</span>
     <button mat-icon-button
             color="primary"
-            aria-label="Example icon button with a menu icon">
+            aria-label="Example icon button with a menu icon"
+            (click)="editDate(item.id)">
       <mat-icon>edit</mat-icon>
     </button>
     <mat-divider></mat-divider>
@@ -46,10 +53,16 @@
             (click)="markIncomplete(item.id)">
       <mat-icon>radio_button_checked</mat-icon>
     </button>
+
+    <!-- <span>
+      <app-project-edit></app-project-edit>
+      <app-duedate-edit></app-duedate-edit>
+    </span>
+  </div>-->
+
   </div>
-</div>
 
 
-<button mat-button
-        (click)="done()"
-        color="primary">Close</button>
+  <button mat-button
+          (click)="done()"
+          color="primary">Close</button>

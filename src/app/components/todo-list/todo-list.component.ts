@@ -50,6 +50,14 @@ export class TodoListComponent implements OnInit {
       }));
     }
   }
+  editProject(id: string): void {
+    this.store.dispatch(actions.todoStartProjectEdit({ id }));
+
+  }
+  editDate(id: string): void {
+    this.store.dispatch(actions.todoStartDateEdit({ id }));
+
+  }
   markComplete(id: string): void {
     this.store.dispatch(actions.todoCompleted({ id }));
 

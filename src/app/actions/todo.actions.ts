@@ -9,10 +9,23 @@ export const todoCompleted = createAction(
   '[todo] todo item completed',
   props<{ id: string }>()
 );
+
 export const todoIncompleted = createAction(
   '[todo] todo item incompleted',
   props<{ id: string }>()
 );
+
+
+export const todoStartProjectEdit = createAction(
+  '[todo] todo start project edit',
+  props<{ id: string }>()
+);
+
+export const todoStartDateEdit = createAction(
+  '[todo] todo start date edit',
+  props<{ id: string }>()
+);
+
 let tempId = 0;
 export const todoAdded = createAction(
   '[todo] todo item added',
@@ -25,6 +38,12 @@ export const todoAdded = createAction(
       dueDate
     } as TodoEntity
   })
+);
+
+
+export const todoProjectEdit = createAction(
+  '[todo] todo project edit',
+  props<{ project: string, id: string }>()
 );
 
 export const todoAddedSucceeded = createAction(
